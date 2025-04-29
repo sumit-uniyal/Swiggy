@@ -3,10 +3,12 @@ import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link } from 'react-router-dom'
 import LoginPopup from '../LoginPopup/LoginPopup'
+import {useSelector} from 'react-redux'
 
 const NavBar = () => {   
   const [menu, setMenu] = useState('home')
   const [showLogin, setShowLogin] = useState(false)
+  const cartItem = useSelector(state => state.cart.cartItem)
   
   return (
     <div className='navbar'>
@@ -22,7 +24,8 @@ const NavBar = () => {
           <Link to='/cart'>
             <img src={assets.basket_icon} />
           </Link>
-          <div className='dot'></div>
+          {Object.keys(cartItem).length > 0 ? <div className='dot'></div> : ''}
+          
         </div>
         <button onClick={()=>setShowLogin(true)}>Sign in</button>
         { showLogin && (

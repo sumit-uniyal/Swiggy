@@ -18,6 +18,12 @@ a{
   width: 80%;
   margin: auto;
 }
+.app-container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+}
 @keyframes fadeIn{
   0%{
     opacity: 0;
