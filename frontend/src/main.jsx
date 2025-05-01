@@ -6,16 +6,20 @@ import store from './components/store/Store.jsx'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import Footer from './components/Footer/Footer.jsx'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const persistor = persistStore(store);
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <div className="app-container">
-        <App />
-        <Footer />
-      </div>
-    </PersistGate>
-  </Provider>,
+
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="app-container">
+          <App />
+          <Footer />
+        </div>
+      </PersistGate>
+    </Provider>
+  </GoogleOAuthProvider>,
 )

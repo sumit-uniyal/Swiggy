@@ -1,0 +1,107 @@
+.list {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .list > p {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .list-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .list-table-format {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr 60px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    transition: 0.3s ease;
+  }
+  
+  .list-table-format.title {
+    background-color: #ececec;
+    font-weight: bold;
+  }
+  
+  .list-table-format img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .list-table-format p,
+  .list-table-format b {
+    margin: 0;
+    text-align: center;
+  }
+
+  .cross{
+    cursor: pointer;
+  }
+  
+  /* ======== Mobile: Card Style ======== */
+  @media screen and (max-width: 768px) {
+    .list-table-format {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px;
+      gap: 10px;
+      background-color: #f5f5f5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+  
+    .list-table-format.title {
+      display: none;
+    }
+  
+    .list-table-format img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  
+    .list-table-format p {
+      width: 100%;
+      font-size: 16px;
+      text-align: left;
+    }
+  
+    .list-table-format p:nth-child(2)::before {
+      content: "Name: ";
+      font-weight: 600;
+    }
+  
+    .list-table-format p:nth-child(3)::before {
+      content: "Category: ";
+      font-weight: 600;
+    }
+  
+    .list-table-format p:nth-child(4)::before {
+      content: "Price: ₹";
+      font-weight: 600;
+    }
+  
+    .list-table-format p:nth-child(5)::before {
+      content: "Action: ";
+      font-weight: 600;
+    }
+  }
+  

@@ -99,3 +99,6 @@
   .login-popup span:hover {
     text-decoration: underline;
   }
+  .sign-btn{
+    margin-top: 10px;
+  }
