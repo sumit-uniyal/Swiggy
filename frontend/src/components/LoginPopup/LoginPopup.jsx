@@ -1,11 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './LoginPopup.css'
 import { assets } from '../../assets/assets'
+import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios'
 
 const LoginPopup = (props) => {
     const {setShowLogin} = props
     const [currState, setCurrState] = useState('Sign Up')
+    const [credential, setCredential] = useState('')
+    
 
+    const verifyToken = async()=>{
+      const baseUrl = import.meta.env.VITE_BASE_URL
+      const finalURL = `${baseUrl}api/user/google/login`
+  
+      try {
+        const response = await axios.post(finalURL,{ 
+          token: credential }, {
+          withCredentials: true
+        });
+        
+        if(response.status === 200){
+          console.log('Successfully Login')
+        }
+      } catch (error) {
+        console.log('Error in Sign-in '+error)
+      }
+    }
+
+
+    useEffect(()=>{
+      if(!credential){
+        return
+      }
+      verifyToken()
+    },[credential])
+    
   return (
     <div className='login-popup'>
       <form className='login-popup-container'>
@@ -22,13 +52,22 @@ const LoginPopup = (props) => {
           <input type='password' placeholder='Password' required />
         </div>
         <button>{currState === 'Sign Up'?'Create Account' : 'Login'} </button>
-        <div className="login-popup-condition">
-          <input type='checkbox' required />
-          <p>By Continuing, i agree to the terms of use & privacy policy.</p>
+        <div className='sign-btn'>
+          <GoogleLogin 
+            onSuccess={(credentialResponse) => {
+              setCredential(credentialResponse.credential); // just the token
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+           
+          />
         </div>
+        
+        
         {currState === 'Login'
-          ?<p>Create a new Account?<span onClick={()=>setCurrState('Sign Up')}>Click here</span></p>
-          :<p>Already have an account <span onClick={()=>setCurrState('Login')}>Login here</span></p>
+          ?<p className='sign-btn'>Create a new Account?<span onClick={()=>setCurrState('Sign Up')}>Click here</span></p>
+          :<p className='sign-btn'>Already have an account <span onClick={()=>setCurrState('Login')}>Login here</span></p>
         }
       </form>
     </div>
