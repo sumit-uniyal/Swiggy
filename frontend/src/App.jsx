@@ -8,6 +8,8 @@ import Layout from './components/Navbar/Layout';
 import { ToastContainer } from 'react-toastify';
 import AdminLayout from './components/AdminLayout';
 import Add from './components/Admin/Add';
+import List from './components/Admin/List';
+import Order from './components/Admin/Order';
 
 const App = () => {
    
@@ -32,9 +34,17 @@ const App = () => {
         element:<AdminLayout />,
         children:[
           {
-            path: "",
+            path: '',
             element: <Add />,
-          }
+          },
+          {
+            path: 'list',
+            element: <List />,
+          },
+          {
+            path: 'orders',
+            element: <Order />,
+          },
         ]
     }
   ])

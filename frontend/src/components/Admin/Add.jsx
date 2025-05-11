@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Add.css'
+import './Admin.css'
 import {assets} from '../../assets/assets'
 import axios from 'axios'
 import { SuccessToast, ErrorToast, WarningToast } from '../../components/Toaster'
