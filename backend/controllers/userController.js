@@ -57,7 +57,8 @@ const login =async(req,res)=>{
         res.cookie('token',token,{
             httponly:true,
             secure:true,
-            maxAge:24 * 60 * 60 * 1000
+            maxAge:24 * 60 * 60 * 1000,
+            sameSite: 'None'
         })
         res.status(200).json({msg:'Successfully login',name:userData.name,email:userData.email,isAdmin:userData.isAdmin,userId:userData._id})
 
@@ -86,7 +87,8 @@ const register =async(req,res)=>{
         res.cookie('token',token,{
             httponly:true,
             secure:true,
-            maxAge:24 * 60 * 60 * 1000
+            maxAge:24 * 60 * 60 * 1000,
+            sameSite: 'None'
         })
         res.status(200).json({msg:'Successfully Register',name:userData.name,email:userData.email,isAdmin:userData.isAdmin,userId:userData._id})
 
@@ -100,7 +102,7 @@ const logout = async(req,res)=>{
         res.clearCookie('token', {
             httpOnly: true,
             secure: true,
-            sameSite: 'Strict',
+            sameSite: 'None',
             path: '/',          
         });
         res.status(200).json({msg:'Successfully logout'})
