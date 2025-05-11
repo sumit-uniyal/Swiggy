@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './FoodDisplay.css'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import FoodItem from '../FoodItem/FoodItem'
+import { apiData } from '../store/slices/FoodSlice'
+import { fetchCart } from '../store/slices/CartSlice';
 
 const FoodDisplay = (props) => {
+  const dispatch = useDispatch()
   const {category} = props
   const foodList = useSelector((state)=> state.food.food_list)
+  const cartItem = useSelector((state)=> state.cart.cartItem)
+
+  useEffect(() => {
+    dispatch(apiData()); 
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, []);
 
   return (
     <div className='food-display' id='food-display'>

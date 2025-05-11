@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistReducer } from 'redux-persist';
+import { persistReducer,persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import foodReducer from './slices/FoodSlice'
 import cartReducer from './slices/CartSlice'
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
 const presistConfig=({
     key:'root',
     storage: storage,
-    whitelist: ['cart']
+    whitelist: ['cart','user']
 })
 
 const persistedReducer = persistReducer(presistConfig,rootReducer)
@@ -27,4 +27,6 @@ const store = configureStore({
         }),
 })
 
-export default store
+const persistor = persistStore(store);
+
+export { store as default, persistor };

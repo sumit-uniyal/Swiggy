@@ -1,15 +1,40 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './Navbar.css'
+import { persistor } from '../store/Store';
 import { assets } from '../../assets/assets'
 import { Link } from 'react-router-dom'
 import LoginPopup from '../LoginPopup/LoginPopup'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import { logout } from '../store/slices/UserSlice'
+import { ErrorToast, SuccessToast } from '../Toaster';
+import { clearCart } from '../store/slices/CartSlice';
+import axios from 'axios';
 
-const NavBar = () => {   
+const NavBar = () => {  
+  const dispatch = useDispatch() 
   const [menu, setMenu] = useState('home')
   const [showLogin, setShowLogin] = useState(false)
   const cartItem = useSelector(state => state.cart.cartItem)
-  
+  const userData = useSelector(state => state.user)
+
+  const handleLogout = async() => {
+    try {
+        const base_url = import.meta.env.VITE_BASE_URL;
+        const response = await axios.post(`${base_url}api/user/logout`,{},{
+          withCredentials: true
+        })
+        if(response.status == 200){
+          dispatch(logout());
+          dispatch(clearCart())
+          persistor.purge();
+          localStorage.clear();
+          SuccessToast('Log out Successfully')
+        }
+    } catch (error) {
+        ErrorToast('Unable to Logout')
+    }
+  };
+
   return (
     <div className='navbar'>
       <img src={assets.logo} className='logo' />
@@ -27,7 +52,13 @@ const NavBar = () => {
           {Object.keys(cartItem).length > 0 ? <div className='dot'></div> : ''}
           
         </div>
-        <button onClick={()=>setShowLogin(true)}>Sign in</button>
+        {userData.email ? <button onClick={handleLogout} >Log out</button> 
+                  : <button onClick={()=>setShowLogin(true)}>Log In</button>
+        }
+
+
+        
+    
         { showLogin && (
           <LoginPopup setShowLogin={setShowLogin} />
         )}

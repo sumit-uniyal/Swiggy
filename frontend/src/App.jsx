@@ -5,6 +5,9 @@ import Cart from './pages/Cart/Cart';
 import { RouterProvider } from "react-router/dom";
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
 import Layout from './components/Navbar/Layout';
+import { ToastContainer } from 'react-toastify';
+import AdminLayout from './components/AdminLayout';
+import Add from './components/Admin/Add';
 
 const App = () => {
    
@@ -24,10 +27,20 @@ const App = () => {
           element: <PlaceOrder />
         }
       ]
+    },{
+        path: '/admin',
+        element:<AdminLayout />,
+        children:[
+          {
+            path: "",
+            element: <Add />,
+          }
+        ]
     }
   ])
   return (
     <div className='app'>
+      <ToastContainer />
       <RouterProvider router={router} />
     </div>
   )

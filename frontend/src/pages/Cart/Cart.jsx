@@ -3,6 +3,8 @@ import {useSelector, useDispatch} from 'react-redux'
 import './Cart.css'
 import { removeFromCart } from '../../components/store/slices/CartSlice'
 import { useNavigate } from 'react-router-dom'
+import { MdOutlineDeleteForever } from "react-icons/md";
+
 
 const Cart = () => {
   const navigate = useNavigate()
@@ -38,12 +40,12 @@ const Cart = () => {
               return (
                 <div key={ele._id}>
                   <div className='cart-items-title cart-items-item'>
-                    <img src={ele.image} alt={ele.name} />
+                    <img src={`${import.meta.env.VITE_BASE_URL}images/${ele.image}`} alt={ele.name} />
                     <p>{ele.name}</p>
                     <p>₹{ele.price}</p>
                     <p>{cartItem[ele._id]}</p>
                     <p>₹{ele.price * cartItem[ele._id]}</p>
-                    <p onClick={() => dispatch(removeFromCart({ id: ele._id }))} className='cross' > X</p>
+                    <p onClick={() => dispatch(removeFromCart({ id: ele._id }))} className='cross' ><MdOutlineDeleteForever /></p>
                   </div>
                   <hr />
                 </div>

@@ -20,8 +20,8 @@ const addFood = async(req,res)=>{
 
 const getFood = async(req,res)=>{
     try {
-        const foodItem = await food.find()
-        res.status(200).json({msg:'Food get successfully',data:foodItem})
+        const foodItem = await food.find().select('_id name image price description category').lean();
+        res.status(200).json({msg:'Food get successfullys',data:foodItem})
     } catch (error) {
         res.status(400).json({msg:'Unable to get food at this time '+error})
     }
