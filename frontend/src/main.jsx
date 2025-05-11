@@ -2,13 +2,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { Provider } from 'react-redux'
-import store from './components/store/Store.jsx'
+import store, { persistor }  from './components/store/Store.jsx'
 import { PersistGate } from 'redux-persist/integration/react'
-import { persistStore } from 'redux-persist'
 import Footer from './components/Footer/Footer.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
 createRoot(document.getElementById('root')).render(
 

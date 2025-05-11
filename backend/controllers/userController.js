@@ -30,7 +30,7 @@ const googleLogin = async(req,res)=>{
             maxAge:24 * 60 * 60 * 1000
         })
         
-        res.status(200).json({msg:'Successfully login'})
+        res.status(200).json({msg:'Successfully login',name:userData.name,email:userData.email,isAdmin:userData.isAdmin,userId:userData._id})
         
     } catch (error) {
         res.status(400).json({msg:'Failed to google login'})
@@ -58,7 +58,7 @@ const login =async(req,res)=>{
             secure:true,
             maxAge:24 * 60 * 60 * 1000
         })
-        res.status(200).json({msg:'Successfully login'})
+        res.status(200).json({msg:'Successfully login',name:userData.name,email:userData.email,isAdmin:userData.isAdmin,userId:userData._id})
 
     } catch (error) {
         res.status(400).json({msg:'Failed to login '+error})
@@ -71,7 +71,7 @@ const register =async(req,res)=>{
         const checkEmail = await userModal.findOne({email:email})
 
         if(checkEmail){
-            res.status(400).json({msg:'Email Already register'})
+            return res.status(400).json({msg:'Email Already register'})
         }
 
         const userData = await userModal.create({
@@ -87,11 +87,26 @@ const register =async(req,res)=>{
             secure:true,
             maxAge:24 * 60 * 60 * 1000
         })
-        res.status(200).json({msg:'Successfully Register'})
+        res.status(200).json({msg:'Successfully Register',name:userData.name,email:userData.email,isAdmin:userData.isAdmin,userId:userData._id})
 
     } catch (error) {
         res.status(400).json({msg:'Failed to Register '+error})
     }
 }
 
-module.exports = {googleLogin,login,register}
+const logout = async(req,res)=>{
+    try {
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'Strict',
+            path: '/',          
+        });
+        res.status(200).json({msg:'Successfully logout'})
+
+    } catch (error) {
+        res.status(400).json({msg:'Failed to logout '+error})
+    }
+}
+
+module.exports = {googleLogin,login,register,logout}
