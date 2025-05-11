@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import './List.css'
 import axios from 'axios'
-import { SuccessToast, ErrorToast } from '../../components/Toaster' 
+import { SuccessToast, ErrorToast } from '../Toaster'
 import { FaRegTrashCan } from "react-icons/fa6";
 
 const List = () => {

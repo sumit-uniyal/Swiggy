@@ -1,4 +1,4 @@
-import {Model, Schema} from 'mongoose'
+const  {model, Schema} = require('mongoose')
 
 const orderModal = new Schema ({
     userId:{
@@ -14,7 +14,7 @@ const orderModal = new Schema ({
         required:true
     },
     address:{
-        type:String,
+        type:Object,
         required:true
     },
     status:{
@@ -31,6 +31,6 @@ const orderModal = new Schema ({
     }
 })
 
-const order = Model('order',orderModal)
+const order = model('order',orderModal)
 
 module.exports = order
