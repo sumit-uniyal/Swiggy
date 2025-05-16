@@ -11,7 +11,7 @@ const cartRouter = require('./router/cartRouter')
 const orderRouter = require('./router/orderRouter')
 
 const corsOptions = {
-    origin: ['http://localhost:5173', 'http://localhost:5174','https://swiggy-k1z5.onrender.com'],
+    origin: ['http://localhost:5173','https://swiggy-yucg.onrender.com'],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
 };
