@@ -8,7 +8,8 @@ const Footer = () => {
         <div className="footer-content">
             <div className="footer-content-left">
                 <img src={assets.logo} />
-                <p>Hello i am sumit</p>
+                <p>Built with ❤️ using the MERN Stack (MongoDB, Express.js, React, Node.js).</p>
+                <p>Developed by Sumit Uniyal.</p>
                 <div className="footer-social-icon">
                     <img src={assets.facebook_icon} alt="" />
                     <img src={assets.twitter_icon} alt="" />
